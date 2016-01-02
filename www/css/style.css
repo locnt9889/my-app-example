@@ -1,0 +1,197 @@
+/* Empty. Add your own CSS if you like */
+
+/* start common style */
+.error-src{
+  display: none !important;
+}
+
+/* end common style */
+
+/* start image style */
+ .modal.transparent {
+  background: #808080 !important;
+}
+ .modal.image-modal {
+  width: 100% !important;
+  height: 100%;
+  top: 0 !important;
+  left: 0 !important;
+}
+ .modal .fullscreen-image {
+  width: 100%;
+  height: calc(100% + 75px);
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  overflow: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+ .modal  .slider {
+  width: 100%;
+  height: 100%;
+}
+
+ .modal  p.info {
+  position: absolute;
+  bottom: 55px;
+  margin: 0 auto;
+  width: 100%;
+  display: block;
+  text-align: center;
+  font-size: 28px;
+  color: #ffffff;
+}
+
+/* Fix modal backdrop for smaller devices */
+  .active.modal-backdrop {
+    background-color: #FFF;
+  }
+  .active.modal-backdrop-bg {
+    opacity: .5;
+  }
+  .modal-backdrop-bg {
+    -webkit-transition: opacity 300ms ease-in-out;
+    transition: opacity 300ms ease-in-out;
+    background-color: #000;
+    opacity: 0;
+  }
+
+  /*style button for modal*/
+  .modal-close{
+    background-color: transparent;
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    height: 30px;
+    width: 30px;
+    border-radius: 10px;
+    text-align: center;
+  }
+
+  .modal-close i{
+    font-size: 27px;
+    color: #f8f8f8;
+  }
+
+  .modal-close:hover,
+  .modal-close i:hover{
+    color : #FF0000;
+  }
+
+  /*.modal-share{*/
+    /*position: absolute;*/
+    /*bottom: 30px;*/
+    /*right: 30px;*/
+  /*}*/
+
+  /*.modal-download{*/
+    /*position: absolute;*/
+    /*bottom: 30px;*/
+    /*left: 30px;*/
+  /*}*/
+
+/*.modal-share button, .modal-download button {*/
+  /*border-radius: 15px;*/
+  /*width: 65px;*/
+  /*font-size: 12px;*/
+/*}*/
+
+/*.modal-make-wallpaper{*/
+  /*position: absolute;*/
+  /*bottom: 30px;*/
+  /*width: 100%;*/
+  /*text-align: center;*/
+/*}*/
+
+/*.modal-make-wallpaper button {*/
+  /*border-radius: 15px;*/
+  /*width: 100px;*/
+  /*font-size: 12px;*/
+/*}*/
+
+.image-modal .button-bar .button-small:before,
+.image-modal .button-bar .button-small .icon:before {
+  line-height: 13px;
+}
+
+.image-modal .button-bar .button-small.activated{
+  color: #387EF5;
+  border-color: #387EF5;
+}
+
+.image-modal .button-bar {
+  width: 80%;
+  margin: auto;
+  bottom: 10px;
+  position: fixed;
+  left: 10%;
+  line-height: 10px;
+  /*border: 1px solid #FFFFFF;*/
+}
+
+.image-modal .button-bar .button{
+  border: 1px solid #FFFFFF;
+  border-right-style: none;
+  padding-left: 1px;
+  padding-right: 1px;
+  line-height: 10px;
+  background: transparent;
+  color: #FFFFFF;
+}
+
+.image-modal .button-bar .button span{
+  display: block;
+  line-height: 10px;
+  font-size: 10px;
+}
+
+.image-modal .button-bar .button.button-last{
+  border-right-style: solid;
+  border-radius: 0px 8px 8px 0px;
+}
+
+.image-modal .button-bar .button.button-first{
+  border-radius: 8px 0px 0px 8px;
+}
+
+/*image item in list*/
+.image-row{
+  margin-left: 0px;
+  margin-right: 0px;
+  padding: 3px;
+}
+
+.footer-pagination .pagination{
+  margin : auto;
+}
+
+.image-row .image-item {
+  position: relative;
+}
+
+
+.image-row .image-item .detail-image-list {
+  width: calc(100% - 10px);
+  position: absolute;
+  height: 35px;
+  background-color: #5bc0de;
+  vertical-align: middle;
+  opacity: 0.8;
+  bottom: 10px;
+}
+
+.image-row .image-item .detail-image-list-info {
+  width: 33%;
+  float: left;
+  text-align: center;
+  height: 15px;
+  vertical-align: middle;
+  font-size: 12px;
+  line-height: 15px;
+  margin-top: 10px;
+  color: #FFFFFF;
+}
+
+/*end modal image*/

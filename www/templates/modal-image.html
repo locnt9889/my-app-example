@@ -1,0 +1,28 @@
+<div class="modal image-modal transparent">
+
+  <!-- android and wp8-->
+  <img ng-src="{{imageModal.urlDownload}}" class="fullscreen-image" ng-if="imageModal.urlDownload != undefined && osPlatform != 'iOS'"/>
+  <img ng-src="{{imageModal.img640}}" class="fullscreen-image" ng-if="imageModal.urlDownload == undefined && osPlatform != 'iOS'"/>
+
+  <!-- ios-->
+  <img ng-src="{{imageModal.img640}}" class="fullscreen-image" ng-if="osPlatform == 'iOS'"/>
+
+  <div class="button-bar">
+    <a class="button button-small button-first" ng-click="favoriteImage(imageModal);" ng-disabled="imageModal.isFavorite">
+      <i class="icon ion-ios-heart"></i>
+      <span>Favorite {{imageModal.isFavorite}}</span>
+    </a>
+    <a class="button button-small" ng-click="makeWallpaper(imageModal);" ng-if="osPlatform == 'Android'">
+      <i class="icon ion-ios-albums"></i>
+      <span>Make Wallpaper</span>
+    </a>
+    <a class="button button-small button-last" ng-click="downloadImage(imageModal);" ng-disabled="imageModal.isDownload">
+      <i class="icon ion-ios-cloud-download"></i>
+      <span>Download</span>
+    </a>
+  </div>
+
+  <div class="modal-close" ng-click="closeModal();">
+    <i class="icon ion-close-circled"></i>
+  </div>
+</div>

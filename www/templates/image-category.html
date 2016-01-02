@@ -1,0 +1,51 @@
+<ion-view view-title="{{categoryName}}">
+  <ion-content class="has-footer image-category-list" on-swipe-right="onSwipeRight();" on-swipe-left="onSwipeLeft()">
+    <div class="row image-row" ng-repeat="item in imageList" ng-if="$index % 2 === 0">
+      <div class="col col-50 image-item" ng-if="$index < imageList.length" ng-click="openModalForImage($index);">
+        <img ng-src="{{imageList[$index].url}}" width="100%"/>
+        <div class="detail-image-list">
+          <div class="detail-image-list-info">
+            <span>{{imageList[$index].count_view + ""}}</span>
+            <i class="icon ion-ios-eye"></i>
+          </div>
+
+          <div class="detail-image-list-info">
+            <span>{{imageList[$index].count_favorite + ""}}</span>
+            <i class="icon ion-ios-heart"></i>
+          </div>
+
+          <div class="detail-image-list-info">
+            <span>{{imageList[$index].count_download + ""}}</span>
+            <i class="icon ion-ios-cloud-download"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="col col-50 image-item" ng-if="$index + 1 < imageList.length" ng-click="openModalForImage($index + 1);">
+        <img ng-src="{{imageList[$index+1].url}}" width="100%"/>
+        <div class="detail-image-list col">
+          <div class="detail-image-list-info">
+            <span>{{imageList[$index+1].count_view + ""}}</span>
+            <i class="icon ion-ios-eye"></i>
+          </div>
+
+          <div class="detail-image-list-info">
+            <span>{{imageList[$index+1].count_favorite + ""}}</span>
+            <i class="icon ion-ios-heart"></i>
+          </div>
+
+          <div class="detail-image-list-info">
+            <span>{{imageList[$index+1].count_download + ""}}</span>
+            <i class="icon ion-ios-cloud-download"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+
+  <div class="bar bar-footer footer-pagination" ng-if="categoryId > 0">
+    <uib-pagination boundary-links="true" total-items="totalItems" max-size="5" ng-model="current.currentPage" ng-change="changePageNumber();" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></uib-pagination>
+  </div>
+</ion-view>
+
