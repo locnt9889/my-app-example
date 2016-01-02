@@ -23,7 +23,7 @@
 
       <div class="col col-50 image-item" ng-if="$index + 1 < imageList.length" ng-click="openModalForImage($index + 1);">
         <img ng-src="{{imageList[$index+1].url}}" width="100%"/>
-        <div class="detail-image-list col">
+        <div class="detail-image-list">
           <div class="detail-image-list-info">
             <span>{{imageList[$index+1].count_view + ""}}</span>
             <i class="icon ion-ios-eye"></i>

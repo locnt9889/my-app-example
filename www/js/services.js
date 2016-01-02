@@ -93,6 +93,16 @@ angular.module('starter.services', [])
           downloadStorage.save({key: image.id.toString(), image : image, url : image.urlDownload});
 
           $cordovaToast.showLongTop('Downloaded : ' + image.id);
+
+          var url = DOMAIN + "/rest/image/execute?id=" + image.id + "&type=DOWNLOAD";
+          $http.get(url).then(function(res){
+            console.log("increase download success");
+            //deferred.resolve(res.data);
+          }, function(err){
+            console.log("increase download error");
+            //deferred.reject(err);
+          });
+
           deferred.resolve(result.nativeURL);
         }, function(err) {
           console.log("download error");
@@ -124,6 +134,16 @@ angular.module('starter.services', [])
               console.log("saveImageDataToLibrary msg" + msg);
               image.urlDownload = url;
               $cordovaToast.showLongTop('Downloaded : ' + image.id);
+
+              var url = DOMAIN + "/rest/image/execute?id=" + image.id + "&type=DOWNLOAD";
+              $http.get(url).then(function(res){
+                console.log("increase download success");
+                //deferred.resolve(res.data);
+              }, function(err){
+                console.log("increase download error");
+                //deferred.reject(err);
+              });
+
               deferred.resolve(msg);
             },
             function(err){

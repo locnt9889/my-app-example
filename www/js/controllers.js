@@ -19,6 +19,7 @@ angular.module('starter.controllers', [])
       $scope.imageModal = image;
       ImageService.viewImage($scope.imageModal).then(function(result){
         console.log("View .... " + image.id);
+        $scope.imageModal.count_view = $scope.imageModal.count_view + 1;
       });
       $scope.modal.show();
     };
@@ -52,6 +53,7 @@ angular.module('starter.controllers', [])
         ImageService.downloadImageToLibrary($scope.imageModal).then(function(result){
           //$scope.$apply(function(){
             $scope.imageModal.isDownload = true;
+            $scope.imageModal.count_download = $scope.imageModal.count_download + 1;
           //})
         }, function(err){
           $scope.imageModal.isDownload = false;
@@ -61,6 +63,7 @@ angular.module('starter.controllers', [])
           //$scope.$apply(function(){
             $scope.imageModal.urlDownload = result;
             $scope.imageModal.isDownload = true;
+            $scope.imageModal.count_download = $scope.imageModal.count_download + 1;
           //})
         }, function(err){
           $scope.imageModal.isDownload = false;
@@ -74,6 +77,7 @@ angular.module('starter.controllers', [])
       ImageService.favoriteImage($scope.imageModal).then(function(result){
         //$scope.$apply(function(){
           $scope.imageModal.isFavorite = true;
+          $scope.imageModal.count_favorite = $scope.imageModal.count_favorite + 1;
         //})
       }, function(){
         $scope.imageModal.isFavorite = false;
