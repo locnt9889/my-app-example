@@ -1,28 +1,49 @@
-<div class="modal image-modal transparent">
+<div class="modal image-modal transparent" on-swipe-right="onSwipeRightModal();" on-swipe-left="onSwipeLeftModal()">
 
   <!-- android and wp8-->
-  <img ng-src="{{imageModal.urlDownload}}" class="fullscreen-image" ng-if="imageModal.urlDownload != undefined && osPlatform != 'iOS'"/>
-  <img ng-src="{{imageModal.img640}}" class="fullscreen-image" ng-if="imageModal.urlDownload == undefined && osPlatform != 'iOS'"/>
+  <img ng-src="{{imageListModal[index].urlDownload}}" class="fullscreen-image" ng-if="imageListModal[index].urlDownload != undefined && osPlatform != 'iOS'"/>
+  <img ng-src="{{imageListModal[index].img640}}" class="fullscreen-image" ng-if="imageListModal[index].urlDownload == undefined && osPlatform != 'iOS'"/>
 
   <!-- ios-->
-  <img ng-src="{{imageModal.img640}}" class="fullscreen-image" ng-if="osPlatform == 'iOS'"/>
+  <img ng-src="{{imageListModal[index].img640}}" class="fullscreen-image" ng-if="osPlatform == 'iOS'"/>
+
+  <div class="bar bar-header bar-royal header-modal">
+    <h1 class="title">{{imageListModal[index].name}}</h1>
+    <div class="modal-close" ng-click="closeModal();">
+      <i class="icon ion-close-circled"></i>
+    </div>
+  </div>
+
+  <div class="modal-image-info">
+    <div class="detail-modal-image-info">
+      <span>{{imageListModal[index].count_view + ""}}</span>
+      <i class="icon ion-ios-eye"></i>
+    </div>
+
+    <div class="detail-modal-image-info">
+      <span>{{imageListModal[index].count_favorite + ""}}</span>
+      <i class="icon ion-ios-heart"></i>
+    </div>
+
+    <div class="detail-modal-image-info">
+      <span>{{imageListModal[index].count_download + ""}}</span>
+      <i class="icon ion-ios-cloud-download"></i>
+    </div>
+  </div>
 
   <div class="button-bar">
-    <a class="button button-small button-first" ng-click="favoriteImage(imageModal);" ng-disabled="imageModal.isFavorite">
+    <a class="button button-small button-calm button-first" ng-click="favoriteImage(imageModal);" ng-disabled="imageListModal[index].isFavorite">
       <i class="icon ion-ios-heart"></i>
       <span>Favorite</span>
     </a>
-    <a class="button button-small" ng-click="makeWallpaper(imageModal);" ng-if="osPlatform == 'Android'">
+    <a class="button button-small button-calm" ng-click="makeWallpaper(imageListModal[index]);" ng-if="osPlatform == 'Android'">
       <i class="icon ion-ios-albums"></i>
       <span>Make Wallpaper</span>
     </a>
-    <a class="button button-small button-last" ng-click="downloadImage(imageModal);" ng-disabled="imageModal.isDownload">
+    <a class="button button-small button-calm button-last" ng-click="downloadImage(imageListModal[index]);" ng-disabled="imageListModal[index].isDownload">
       <i class="icon ion-ios-cloud-download"></i>
       <span>Download</span>
     </a>
   </div>
 
-  <div class="modal-close" ng-click="closeModal();">
-    <i class="icon ion-close-circled"></i>
-  </div>
 </div>

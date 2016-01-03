@@ -98,7 +98,7 @@ angular.module('starter.services', [])
           console.log("url download : " + result.nativeURL);
 
           downloadStorage.remove(image.id.toString());
-          downloadStorage.save({key: image.id.toString(), image : image, url : image.urlDownload});
+          downloadStorage.save({key: image.id.toString(), image : image, img640 : image.urlDownload});
 
           $cordovaToast.showLongTop('Downloaded : ' + image.id);
 
@@ -168,7 +168,11 @@ angular.module('starter.services', [])
         var deferred = $q.defer();
 
         downloadStorage.all(function(result){
-          deferred.resolve(result);
+          var resultConvert = [];
+          for(var i = 0; i < result.length; i ++){
+            resultConvert.push(result[i].image);
+          }
+          deferred.resolve(resultConvert);
         });
 
         return deferred.promise;
@@ -185,10 +189,10 @@ angular.module('starter.services', [])
       checkMediaExists: function(id) {
         var deferred = $q.defer();
         downloadStorage.get(id.toString(), function(value){
-          var result = {exists: false, url:"", image:{}};
+          var result = {exists: false, img640:"", image:{}};
           if(value) {
             result.exists = true;
-            result.url = value.url;
+            result.img640 = value.img640;
             result.image = value.media;
           }
           deferred.resolve(result);
@@ -205,12 +209,12 @@ angular.module('starter.services', [])
 
         downloadStorage.all(function(result){
           for(var i = 0; i < result.length; i++ ){
-            var urlDownload = result[i].url;
+            var urlDownload = result[i].img640;
             var fileName = urlDownload.substring(urlDownload.lastIndexOf('/'));
-            result[i].url = newPath + fileName;
-            result[i].image.urlDownload = result[i].url;
+            result[i].img640 = newPath + fileName;
+            result[i].image.urlDownload = result[i].img640;
             downloadStorage.remove(result[i].image.id.toString());
-            downloadStorage.save({key: result[i].image.id.toString(), image : result[i].image, url : result[i].url});
+            downloadStorage.save({key: result[i].image.id.toString(), image : result[i].image, img640 : result[i].img640});
           }
         });
       }

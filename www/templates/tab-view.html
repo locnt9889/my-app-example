@@ -1,8 +1,8 @@
 <ion-view view-title="Top View">
   <ion-content>
     <div class="row image-row" ng-repeat="item in imageTopViewList" ng-if="$index % 2 === 0">
-      <div class="col col-50 image-item" ng-if="$index < imageTopViewList.length" ng-click="openModal(imageTopViewList[$index])">
-        <img ng-src="{{imageTopViewList[$index].url}}" width="100%"/>
+      <div class="col col-50 image-item" ng-if="$index < imageTopViewList.length" ng-click="openModal(imageTopViewList,$index)">
+        <img ng-src="{{imageTopViewList[$index].img640}}" width="100%"/>
         <div class="detail-image-list">
           <div class="detail-image-list-info">
             <span>{{imageTopViewList[$index].count_view + ""}}</span>
@@ -21,8 +21,8 @@
         </div>
       </div>
 
-      <div class="col col-50 image-item" ng-if="$index + 1 < imageTopViewList.length" ng-click="openModal(imageTopViewList[$index + 1])">
-        <img ng-src="{{imageTopViewList[$index+1].url}}" width="100%"/>
+      <div class="col col-50 image-item" ng-if="$index + 1 < imageTopViewList.length" ng-click="openModal(imageTopViewList,$index + 1)">
+        <img ng-src="{{imageTopViewList[$index+1].img640}}" width="100%"/>
         <div class="detail-image-list">
           <div class="detail-image-list-info">
             <span>{{imageTopViewList[$index+1].count_view + ""}}</span>

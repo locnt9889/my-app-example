@@ -15,11 +15,24 @@ angular.module('starter.controllers', [])
       $scope.modal = modal;
     });
 
-    $rootScope.openModal = function(image) {
+    /*$rootScope.openModal = function(image) {
       $scope.imageModal = image;
       ImageService.viewImage($scope.imageModal).then(function(result){
         console.log("View .... " + image.id);
         $scope.imageModal.count_view = $scope.imageModal.count_view + 1;
+      });
+      $scope.modal.show();
+    };*/
+
+    $scope.imageListModal = [];
+
+    //$scope.imageListModal and imageList are one
+    $rootScope.openModal = function(imageList, index) {
+      $scope.imageListModal = imageList;
+      $scope.index = index;
+      ImageService.viewImage($scope.imageListModal[index]).then(function(result){
+        console.log("View .... " + $scope.imageListModal[index].id);
+        $scope.imageListModal[index].count_view = $scope.imageListModal[index].count_view + 1;
       });
       $scope.modal.show();
     };
@@ -47,40 +60,40 @@ angular.module('starter.controllers', [])
 
     //download image
     $scope.downloadImage = function(){
-      $scope.imageModal.isDownload = true;
+      $scope.imageListModal[$scope.index].isDownload = true;
 
       if($rootScope.osPlatform == "iOS"){
-        ImageService.downloadImageToLibrary($scope.imageModal).then(function(result){
+        ImageService.downloadImageToLibrary($scope.imageListModal[$scope.index]).then(function(result){
           //$scope.$apply(function(){
-            $scope.imageModal.isDownload = true;
-            $scope.imageModal.count_download = $scope.imageModal.count_download + 1;
+          $scope.imageListModal[$scope.index].isDownload = true;
+          $scope.imageListModal[$scope.index].count_download += 1;
           //})
         }, function(err){
-          $scope.imageModal.isDownload = false;
+          $scope.imageListModal[$scope.index].isDownload = false;
         });
       }else{
-        ImageService.downloadImage($scope.imageModal).then(function(result){
+        ImageService.downloadImage($scope.imageListModal[$scope.index]).then(function(result){
           //$scope.$apply(function(){
-            $scope.imageModal.urlDownload = result;
-            $scope.imageModal.isDownload = true;
-            $scope.imageModal.count_download = $scope.imageModal.count_download + 1;
+          $scope.imageListModal[$scope.index].urlDownload = result;
+          $scope.imageListModal[$scope.index].isDownload = true;
+          $scope.imageListModal[$scope.index].count_download += 1;
           //})
         }, function(err){
-          $scope.imageModal.isDownload = false;
+          $scope.imageListModal[$scope.index].isDownload = false;
         });
       }
     }
 
     //favorite image
     $scope.favoriteImage = function(){
-      $scope.imageModal.isFavorite = true;
-      ImageService.favoriteImage($scope.imageModal).then(function(result){
+      $scope.imageListModal[$scope.index].isFavorite = true;
+      ImageService.favoriteImage($scope.imageListModal[$scope.index]).then(function(result){
         //$scope.$apply(function(){
-          $scope.imageModal.isFavorite = true;
-          $scope.imageModal.count_favorite = $scope.imageModal.count_favorite + 1;
+        $scope.imageListModal[$scope.index].isFavorite = true;
+        $scope.imageListModal[$scope.index].count_favorite += 1;
         //})
       }, function(){
-        $scope.imageModal.isFavorite = false;
+        $scope.imageListModal[$scope.index].isFavorite = false;
       });
     }
 
@@ -107,6 +120,20 @@ angular.module('starter.controllers', [])
           console.log("$cordovaAppRate.promptForRating : success");
         });
       }, false);
+    }
+
+    //onSwipeRightModal
+    $scope.onSwipeRightModal = function(){
+      if($scope.index > 1){
+        $scope.index = $scope.index - 1;
+      }
+    }
+
+    //onSwipeLeftModal
+    $scope.onSwipeLeftModal = function(){
+      if($scope.index < $scope.imageListModal.length - 2) {
+        $scope.index = $scope.index + 1;
+      }
     }
 
   }])
@@ -285,7 +312,7 @@ angular.module('starter.controllers', [])
         }
       }
 
-      $scope.openModalForImage = function(index) {
+      /*$scope.openModalForImage = function(index) {
         console.log("index : " + index);
         var imageModal = {};
         if($scope.categoryId == 0){
@@ -294,7 +321,7 @@ angular.module('starter.controllers', [])
           imageModal = $scope.imageList[index];
         }
         $rootScope.openModal(imageModal);
-      };
+      };*/
   }])
 
   .controller('DemoCtrl', ["$scope", "$rootScope" , function($scope, $rootScope) {

@@ -59,10 +59,17 @@
   }
 
   /*style button for modal*/
+  .header-modal{
+    opacity: 0.7;
+  }
+  .header-modal h1.title{
+    text-align: left;
+  }
+
   .modal-close{
     background-color: transparent;
     position: absolute;
-    top: 30px;
+    top: 10px;
     right: 20px;
     height: 30px;
     width: 30px;
@@ -122,22 +129,23 @@
 }
 
 .image-modal .button-bar {
-  width: 80%;
+  width: 60%;
   margin: auto;
   bottom: 10px;
   position: fixed;
-  left: 10%;
+  left: 20%;
   line-height: 10px;
   /*border: 1px solid #FFFFFF;*/
 }
 
 .image-modal .button-bar .button{
-  border: 1px solid #FFFFFF;
-  border-right-style: none;
+  border-right: 1px solid #FFFFFF;
+  /*border-right-style: none;*/
   padding-left: 1px;
   padding-right: 1px;
   line-height: 10px;
-  background: transparent;
+  /*background: transparent;*/
+  /*opacity: 0.7;*/
   color: #FFFFFF;
 }
 
@@ -148,12 +156,38 @@
 }
 
 .image-modal .button-bar .button.button-last{
-  border-right-style: solid;
+  border-right-style: none;
   border-radius: 0px 8px 8px 0px;
 }
 
 .image-modal .button-bar .button.button-first{
   border-radius: 8px 0px 0px 8px;
+}
+
+.modal-image-info{
+  position: absolute;
+  top : 80px;
+  left: 0px;
+}
+
+.modal-image-info .detail-modal-image-info {
+  height: 30px;
+  width: 60px;
+  background-color: #000000;
+  margin-bottom: 20px;
+  opacity: 0.6;
+  color: #FFFFFF;
+  text-align: right;
+  padding-right: 5px;
+  padding-top: 5px;
+  font-size: 14px;
+  border-radius: 0px 15px 15px 0px;
+}
+
+.modal-image-info .detail-modal-image-info span {
+  font-size: 12px;
+  position: relative;
+  top: -1px
 }
 
 /*image item in list*/
@@ -169,6 +203,7 @@
 
 .image-row .image-item {
   position: relative;
+  padding: 0px 1px 0px 1px;
 }
 
 
