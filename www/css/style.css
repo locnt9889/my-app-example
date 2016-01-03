@@ -208,13 +208,13 @@
 
 
 .image-row .image-item .detail-image-list {
-  width: calc(100% - 10px);
+  width: calc(100% - 2px);
   position: absolute;
   height: 35px;
   background-color: #5bc0de;
   vertical-align: middle;
   opacity: 0.8;
-  bottom: 10px;
+  bottom: 5px;
 }
 
 .image-row .image-item .detail-image-list-info {
