@@ -17,9 +17,9 @@ if( /(android)/i.test(navigator.userAgent) ) {
 }
 
 if(( /(ipad|iphone|ipod|android|windows phone)/i.test(navigator.userAgent) )) {
-  //document.addEventListener('deviceready', initApp, false);
+  document.addEventListener('deviceready', initApp, false);
 } else {
-  //initApp();
+  initApp();
 }
 
 function initApp() {

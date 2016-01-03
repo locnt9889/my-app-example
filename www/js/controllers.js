@@ -115,6 +115,79 @@ angular.module('starter.controllers', [])
     console.log("BrowseCtrl");
   }])
 
+  //recent
+  .controller('RecentCtrl', ["$scope", "$rootScope","ImageService", function($scope, $rootScope, ImageService) {
+    console.log("RecentCtrl");
+    $scope.isRecentLoading = true;
+    $scope.imageRecentList = [];
+    var page = 1;
+    var PER_PAGE = 20;
+    ImageService.getSearchImage(page, PER_PAGE, "id", "DESC", 0, "").then(function (data) {
+      console.log("data : " + JSON.stringify(data));
+      $scope.imageRecentList = data.results.items;
+      $scope.isRecentLoading = false;
+
+    }, function (err) {
+      console.log("Error getting data: " + JSON.stringify(err));
+      $scope.isRecentLoading = false;
+    });
+
+  }])
+
+  //top view
+  .controller('TopViewCtrl', ["$scope", "$rootScope","ImageService", function($scope, $rootScope, ImageService) {
+    console.log("TopViewCtrl");
+    $scope.isTopViewLoading = true;
+    $scope.imageTopViewList = [];
+    var page = 1;
+    var PER_PAGE = 20;
+    ImageService.getSearchImage(page, PER_PAGE, "count_view", "DESC", 0, "").then(function (data) {
+      console.log("data : " + JSON.stringify(data));
+      $scope.imageTopViewList = data.results.items;
+      $scope.isTopViewLoading = false;
+
+    }, function (err) {
+      console.log("Error getting data: " + JSON.stringify(err));
+      $scope.isTopViewLoading = false;
+    });
+  }])
+
+  //top favorite
+  .controller('TopFavoriteCtrl', ["$scope", "$rootScope","ImageService", function($scope, $rootScope, ImageService) {
+    console.log("TopFavoriteCtrl");
+    $scope.isTopFavoriteLoading = true;
+    $scope.imageTopFavoriteList = [];
+    var page = 1;
+    var PER_PAGE = 20;
+    ImageService.getSearchImage(page, PER_PAGE, "count_favorite", "DESC", 0, "").then(function (data) {
+      console.log("data : " + JSON.stringify(data));
+      $scope.imageTopFavoriteList = data.results.items;
+      $scope.isTopFavoriteLoading = false;
+
+    }, function (err) {
+      console.log("Error getting data: " + JSON.stringify(err));
+      $scope.isTopFavoriteLoading = false;
+    });
+  }])
+
+  //top download
+  .controller('TopDownloadCtrl', ["$scope", "$rootScope","ImageService", function($scope, $rootScope, ImageService) {
+    console.log("TopDownloadCtrl");
+    $scope.isTopDownloadLoading = true;
+    $scope.imageTopDownloadList = [];
+    var page = 1;
+    var PER_PAGE = 20;
+    ImageService.getSearchImage(page, PER_PAGE, "count_download", "DESC", 0, "").then(function (data) {
+      console.log("data : " + JSON.stringify(data));
+      $scope.imageTopDownloadList = data.results.items;
+      $scope.isTopDownloadLoading = false;
+
+    }, function (err) {
+      console.log("Error getting data: " + JSON.stringify(err));
+      $scope.isTopDownloadLoading = false;
+    });
+  }])
+
   .controller('CategoryCtrl', ["$scope", "$rootScope", "$ionicLoading", "CategoryService",function($scope, $rootScope, $ionicLoading, CategoryService) {
     //Controller for list category
     $ionicLoading.show();

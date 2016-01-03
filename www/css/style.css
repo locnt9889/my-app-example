@@ -195,3 +195,16 @@
 }
 
 /*end modal image*/
+
+/*style for tab in browse*/
+.tabs-browse .tabs{
+  height : 42px;
+}
+.tabs-browse .tabs .tab-item i {
+  font-size: 24px;
+  height: 24px;
+}
+.tabs-browse .tabs .tab-item span {
+  font-size: 12px;
+}
+/*style for tab in browse*/

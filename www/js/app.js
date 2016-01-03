@@ -84,6 +84,47 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
         }
       }
     })
+
+    .state('app.browse.recent', {
+      url: '/recent',
+      views: {
+        'tab-recent': {
+          templateUrl: 'templates/tab-recent.html',
+          controller: 'RecentCtrl'
+        }
+      }
+    })
+
+    .state('app.browse.view', {
+      url: '/view',
+      views: {
+        'tab-view': {
+          templateUrl: 'templates/tab-view.html',
+          controller: 'TopViewCtrl'
+        }
+      }
+    })
+
+    .state('app.browse.favorite', {
+      url: '/favorite',
+      views: {
+        'tab-favorite': {
+          templateUrl: 'templates/tab-favorite.html',
+          controller: 'TopFavoriteCtrl'
+        }
+      }
+    })
+
+    .state('app.browse.download', {
+      url: '/download',
+      views: {
+        'tab-download': {
+          templateUrl: 'templates/tab-download.html',
+          controller: 'TopDownloadCtrl'
+        }
+      }
+    })
+
     .state('app.category', {
       url: '/category',
       views: {

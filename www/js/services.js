@@ -4,10 +4,18 @@ angular.module('starter.services', [])
     var downloadStorage = new Lawnchair({ name : "DownloadStorage", adapter : "webkit-sqlite"}, function () {});
 
     return {
-      getAllImage: function(page, perPage) {
+      getSearchImage: function(page, perPage, orderBy, orderType, categoryId, name) {
         var deferred = $q.defer();
 
-        var url = "http://104.131.166.42:5002/image/findall?pageNum=" + page +"&perPage=" + perPage;
+        var url = DOMAIN + "/rest/image/search?pageNum=" + page +"&perPage=" + perPage + "&orderBy=" + orderBy + "&orderType=" + orderType;
+        if(categoryId > 0){
+          url = url + "&category=" + categoryId;
+        }
+
+        if(name && name != ""){
+          url = url + "&name=" + name;
+        }
+
         $http.get(url).then(function(res){
           deferred.resolve(res.data);
         }, function(err){

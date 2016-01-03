@@ -1,6 +1,23 @@
-<ion-view view-title="Browse">
-  <ion-content>
-    <h1>Browse</h1>
-    <hello>dasdasd</hello>
-  </ion-content>
-</ion-view>
+<ion-tabs class="tabs-icon-top tabs-color-active-positive tabs-bottom tabs-browse">
+
+  <!-- Recent Tab -->
+  <ion-tab title="Recent" icon-off="ion-ios-time" icon-on="ion-ios-time" href="#/app/browse/recent">
+    <ion-nav-view name="tab-recent"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Popular Tab -->
+  <ion-tab title="Top View" icon-off="ion-ios-eye" icon-on="ion-ios-eye" href="#/app/browse/view">
+    <ion-nav-view name="tab-view"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Top rate Tab -->
+  <ion-tab title="Top Favorite" icon-off="ion-ios-heart" icon-on="ion-ios-heart" href="#/app/browse/favorite">
+    <ion-nav-view name="tab-favorite"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Download Tab -->
+  <ion-tab title="Top Download" icon-off="ion-ios-cloud-download" icon-on="ion-ios-cloud-download" href="#/app/browse/download">
+    <ion-nav-view name="tab-download"></ion-nav-view>
+  </ion-tab>
+
+</ion-tabs>

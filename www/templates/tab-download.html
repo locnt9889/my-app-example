@@ -1,0 +1,46 @@
+<ion-view view-title="Top Download">
+  <ion-content>
+    <div class="row image-row" ng-repeat="item in imageTopDownloadList" ng-if="$index % 2 === 0">
+      <div class="col col-50 image-item" ng-if="$index < imageTopDownloadList.length" ng-click="openModal(imageTopDownloadList[$index])">
+        <img ng-src="{{imageTopDownloadList[$index].url}}" width="100%"/>
+        <div class="detail-image-list">
+          <div class="detail-image-list-info">
+            <span>{{imageTopDownloadList[$index].count_view + ""}}</span>
+            <i class="icon ion-ios-eye"></i>
+          </div>
+
+          <div class="detail-image-list-info">
+            <span>{{imageTopDownloadList[$index].count_favorite + ""}}</span>
+            <i class="icon ion-ios-heart"></i>
+          </div>
+
+          <div class="detail-image-list-info">
+            <span>{{imageTopDownloadList[$index].count_download + ""}}</span>
+            <i class="icon ion-ios-cloud-download"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="col col-50 image-item" ng-if="$index + 1 < imageTopDownloadList.length" ng-click="openModal(imageTopDownloadList[$index + 1])">
+        <img ng-src="{{imageTopDownloadList[$index+1].url}}" width="100%"/>
+        <div class="detail-image-list">
+          <div class="detail-image-list-info">
+            <span>{{imageTopDownloadList[$index+1].count_view + ""}}</span>
+            <i class="icon ion-ios-eye"></i>
+          </div>
+
+          <div class="detail-image-list-info">
+            <span>{{imageTopDownloadList[$index+1].count_favorite + ""}}</span>
+            <i class="icon ion-ios-heart"></i>
+          </div>
+
+          <div class="detail-image-list-info">
+            <span>{{imageTopDownloadList[$index+1].count_download + ""}}</span>
+            <i class="icon ion-ios-cloud-download"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ion-infinite-scroll ng-if="isTopDownloadLoading"></ion-infinite-scroll>
+  </ion-content>
+</ion-view>
