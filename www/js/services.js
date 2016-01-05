@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
   .factory('ImageService', function($q, $http, $rootScope, $cordovaFileTransfer, $timeout, $cordovaToast) {
-    var DOMAIN = "http://sayyoudo.xyz:5555";
+    var DOMAIN = "http://6recipes.com:5555";
     var downloadStorage = new Lawnchair({ name : "DownloadStorage", adapter : "webkit-sqlite"}, function () {});
 
     return {
@@ -221,12 +221,14 @@ angular.module('starter.services', [])
     };
   })
 .factory('CategoryService', function($q, $http) {
+    var DOMAIN = "http://6recipes.com:5555";
+
   return {
     getAllCategory: function() {
       var deferred = $q.defer();
 
       //var url = "http://104.131.166.42:5002/category/findall";
-      var url = "http://sayyoudo.xyz:5555/rest/category/all";
+      var url = DOMAIN + "/rest/category/all";
       $http.get(url).then(function(res){
         deferred.resolve(res.data);
       }, function(err){
