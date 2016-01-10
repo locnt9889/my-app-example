@@ -2,9 +2,9 @@
   <ion-content class="padding">
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="category in categoryList" type="item-text-wrap" href="#/app/image-category/{{category.id}}">
-        <img ng-src="{{category.image}}">
+        <img src="img/{{category.name_url}}.jpg"/>
         <h2>{{category.name}}</h2>
-        <p>{{category.images}} images</p>
+        <p>{{category.images}} item childrent</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
 
         <!--<ion-option-button class="button-assertive" ng-click="remove(category)">-->
