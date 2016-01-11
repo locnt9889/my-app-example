@@ -1,6 +1,44 @@
 angular.module('starter.controllers', [])
 
-  .controller('AppCtrl', ["$scope", "$rootScope", "$state", "$ionicModal", "$cordovaAppRate", "ImageService", function($scope,$rootScope, $state,$ionicModal, $cordovaAppRate, ImageService) {
+  .controller('AppCtrl', ["$scope", "$rootScope", "$state", "$stateParams","$ionicModal", "$cordovaAppRate", "$cordovaNetwork", "$ionicPopup", "ImageService", function($scope,$rootScope, $state, $stateParams, $ionicModal, $cordovaAppRate, $cordovaNetwork, $ionicPopup, ImageService) {
+    //check network
+    document.addEventListener("deviceready", function () {
+
+      var type = $cordovaNetwork.getNetwork()
+
+      //var isOnline = $cordovaNetwork.isOnline()
+
+      var checkNetWork = function() {
+        var isOffline = $cordovaNetwork.isOffline();
+        console.log("isOffline : " + isOffline);
+        if (isOffline) {
+          var alertPopup = $ionicPopup.alert({
+            title: 'Offline Internet Connection ',
+            template: 'The internet connection is failure. Please check your network, then <e>pull down to refresh</e> !'
+          });
+
+          alertPopup.then(function (res) {
+            checkNetWork();
+          });
+        }
+      }
+
+      checkNetWork();
+
+      // listen for Online event
+      $rootScope.$on('$cordovaNetwork:online', function(event, networkState){
+        var onlineState = networkState;
+      })
+
+      // listen for Offline event
+      $rootScope.$on('$cordovaNetwork:offline', function(event, networkState){
+        var offlineState = networkState;
+        checkNetWork();
+      })
+
+    }, false);
+
+
     //conttrol
     $scope.goDownload = function(){
       $state.go("app.image-category",{category : 0});
@@ -149,16 +187,23 @@ angular.module('starter.controllers', [])
     $scope.imageRecentList = [];
     var page = 1;
     var PER_PAGE = 20;
-    ImageService.getSearchImage(page, PER_PAGE, "id", "DESC", 0, "").then(function (data) {
-      console.log("data : " + JSON.stringify(data));
-      $scope.imageRecentList = data.results.items;
-      $scope.isRecentLoading = false;
+    $scope.doRefreshRecent = function(){
+      ImageService.getSearchImage(page, PER_PAGE, "id", "DESC", 0, "").then(function (data) {
+        console.log("data : " + JSON.stringify(data));
+        $scope.imageRecentList = data.results.items;
+        $scope.isRecentLoading = false;
+        $scope.$broadcast('scroll.refreshComplete');
+      }, function (err) {
+        console.log("Error getting data: " + JSON.stringify(err));
+        $scope.isRecentLoading = false;
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+    }
+    $scope.doRefreshRecent();
 
-    }, function (err) {
-      console.log("Error getting data: " + JSON.stringify(err));
-      $scope.isRecentLoading = false;
+    $scope.$broadcast("network.recentReload", function(){
+      $scope.doRefreshRecent();
     });
-
   }])
 
   //top view
@@ -168,15 +213,20 @@ angular.module('starter.controllers', [])
     $scope.imageTopViewList = [];
     var page = 1;
     var PER_PAGE = 20;
-    ImageService.getSearchImage(page, PER_PAGE, "count_view", "DESC", 0, "").then(function (data) {
-      console.log("data : " + JSON.stringify(data));
-      $scope.imageTopViewList = data.results.items;
-      $scope.isTopViewLoading = false;
+    $scope.doRefreshTopView = function() {
+      ImageService.getSearchImage(page, PER_PAGE, "count_view", "DESC", 0, "").then(function (data) {
+        console.log("data : " + JSON.stringify(data));
+        $scope.imageTopViewList = data.results.items;
+        $scope.isTopViewLoading = false;
+        $scope.$broadcast('scroll.refreshComplete');
 
-    }, function (err) {
-      console.log("Error getting data: " + JSON.stringify(err));
-      $scope.isTopViewLoading = false;
-    });
+      }, function (err) {
+        console.log("Error getting data: " + JSON.stringify(err));
+        $scope.isTopViewLoading = false;
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+    }
+    $scope.doRefreshTopView();
   }])
 
   //top favorite
@@ -186,15 +236,20 @@ angular.module('starter.controllers', [])
     $scope.imageTopFavoriteList = [];
     var page = 1;
     var PER_PAGE = 20;
-    ImageService.getSearchImage(page, PER_PAGE, "count_favorite", "DESC", 0, "").then(function (data) {
-      console.log("data : " + JSON.stringify(data));
-      $scope.imageTopFavoriteList = data.results.items;
-      $scope.isTopFavoriteLoading = false;
+    $scope.doRefreshTopFavorite = function() {
+      ImageService.getSearchImage(page, PER_PAGE, "count_favorite", "DESC", 0, "").then(function (data) {
+        console.log("data : " + JSON.stringify(data));
+        $scope.imageTopFavoriteList = data.results.items;
+        $scope.isTopFavoriteLoading = false;
+        $scope.$broadcast('scroll.refreshComplete');
+      }, function (err) {
+        console.log("Error getting data: " + JSON.stringify(err));
+        $scope.isTopFavoriteLoading = false;
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+    }
 
-    }, function (err) {
-      console.log("Error getting data: " + JSON.stringify(err));
-      $scope.isTopFavoriteLoading = false;
-    });
+    $scope.doRefreshTopFavorite();
   }])
 
   //top download
@@ -204,15 +259,19 @@ angular.module('starter.controllers', [])
     $scope.imageTopDownloadList = [];
     var page = 1;
     var PER_PAGE = 20;
-    ImageService.getSearchImage(page, PER_PAGE, "count_download", "DESC", 0, "").then(function (data) {
-      console.log("data : " + JSON.stringify(data));
-      $scope.imageTopDownloadList = data.results.items;
-      $scope.isTopDownloadLoading = false;
-
-    }, function (err) {
-      console.log("Error getting data: " + JSON.stringify(err));
-      $scope.isTopDownloadLoading = false;
-    });
+    $scope.doRefreshTopDownload = function() {
+      ImageService.getSearchImage(page, PER_PAGE, "count_download", "DESC", 0, "").then(function (data) {
+        console.log("data : " + JSON.stringify(data));
+        $scope.imageTopDownloadList = data.results.items;
+        $scope.isTopDownloadLoading = false;
+        $scope.$broadcast('scroll.refreshComplete');
+      }, function (err) {
+        console.log("Error getting data: " + JSON.stringify(err));
+        $scope.isTopDownloadLoading = false;
+        $scope.$broadcast('scroll.refreshComplete');
+      });
+    }
+    $scope.doRefreshTopDownload();
   }])
 
   .controller('CategoryCtrl', ["$scope", "$rootScope", "$ionicLoading", "CategoryService",function($scope, $rootScope, $ionicLoading, CategoryService) {

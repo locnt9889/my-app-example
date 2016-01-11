@@ -1,5 +1,6 @@
 <ion-view view-title="Top Download">
   <ion-content>
+    <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefreshTopDownload()"> </ion-refresher>
     <div class="row image-row" ng-repeat="item in imageTopDownloadList" ng-if="$index % 2 === 0">
       <div class="col col-50 image-item" ng-if="$index < imageTopDownloadList.length" ng-click="openModal(imageTopDownloadList, $index)">
         <img ng-src="{{imageTopDownloadList[$index].img640}}" width="100%"/>

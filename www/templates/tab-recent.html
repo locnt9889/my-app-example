@@ -1,5 +1,7 @@
 <ion-view view-title="Recent">
   <ion-content>
+    <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefreshRecent()"> </ion-refresher>
+
     <div class="row image-row" ng-repeat="item in imageRecentList" ng-if="$index % 2 === 0">
       <div class="col col-50 image-item" ng-if="$index < imageRecentList.length" ng-click="openModal(imageRecentList, $index)">
         <img ng-src="{{imageRecentList[$index].img640}}" width="100%"/>

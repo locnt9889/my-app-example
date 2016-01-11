@@ -15,7 +15,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','s
     //duration : 15000
   })
 
-.run(function($ionicPlatform, $rootScope, ImageService) {
+.run(function($ionicPlatform, $rootScope, $cordovaNetwork, $ionicPopup, ImageService) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
