@@ -3,7 +3,7 @@
     <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefreshTopView()"> </ion-refresher>
     <div class="row image-row" ng-repeat="item in imageTopViewList" ng-if="$index % 2 === 0">
       <div class="col col-50 image-item" ng-if="$index < imageTopViewList.length" ng-click="openModal(imageTopViewList,$index)">
-        <img ng-src="{{imageTopViewList[$index].img640}}" width="100%"/>
+        <img fallback-src="{{imageTopViewList[$index].img640}}" width="100%" ng-src="img/640x960.jpg"/>
         <div class="detail-image-list">
           <div class="detail-image-list-info">
             <span>{{imageTopViewList[$index].count_view + ""}}</span>
@@ -23,7 +23,7 @@
       </div>
 
       <div class="col col-50 image-item" ng-if="$index + 1 < imageTopViewList.length" ng-click="openModal(imageTopViewList,$index + 1)">
-        <img ng-src="{{imageTopViewList[$index+1].img640}}" width="100%"/>
+        <img fallback-src="{{imageTopViewList[$index + 1].img640}}" width="100%" ng-src="img/640x960.jpg"/>
         <div class="detail-image-list">
           <div class="detail-image-list-info">
             <span>{{imageTopViewList[$index+1].count_view + ""}}</span>
