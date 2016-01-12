@@ -301,7 +301,7 @@ angular.module('starter.controllers', [])
       if(categoryId > 0){
         categoryName = CategoryService.getNameByIdInList($rootScope.categoryBackupList, categoryId);
       }else if(categoryId == 0){
-        categoryName = "Downloaded";
+        categoryName = "Image";
       }
 
       $scope.categoryName = categoryName;
@@ -328,28 +328,13 @@ angular.module('starter.controllers', [])
         });
       };
 
-      var loadImageDownloaded= function() {
-        ImageService.getDownloadList().then(function (data) {
-          console.log("data : " + JSON.stringify(data));
-          $scope.imageList = data;
-        }, function (err) {
-          console.log("Error getting data: " + JSON.stringify(err));
-        });
-      };
-
-      $scope.$emit('downloaded.removeErrorSrc', function(){
-        console.log("downloaded.removeErrorSrc reload");
-        loadImageDownloaded();
-      });
-
       if ($scope.categoryId > 0) {
         $scope.current = {};
         $scope.current.currentPage = 1;
         $scope.totalItems = 0;
         loadImage($scope.current.currentPage);
-      }else{
-        loadImageDownloaded();
       }
+
       //paging
       $scope.changePageNumber = function(){
         loadImage($scope.current.currentPage);
@@ -370,17 +355,6 @@ angular.module('starter.controllers', [])
           loadImage($scope.current.currentPage);
         }
       }
-
-      /*$scope.openModalForImage = function(index) {
-        console.log("index : " + index);
-        var imageModal = {};
-        if($scope.categoryId == 0){
-          imageModal = $scope.imageList[index].image;
-        }else{
-          imageModal = $scope.imageList[index];
-        }
-        $rootScope.openModal(imageModal);
-      };*/
   }])
 
   .controller('DemoCtrl', ["$scope", "$rootScope" , function($scope, $rootScope) {

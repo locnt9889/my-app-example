@@ -1,11 +1,7 @@
 <div class="modal image-modal transparent" on-swipe-right="onSwipeRightModal();" on-swipe-left="onSwipeLeftModal()">
 
-  <!-- android and wp8-->
-  <img ng-src="{{imageListModal[index].urlDownload}}" class="fullscreen-image" ng-if="imageListModal[index].urlDownload != undefined && osPlatform != 'iOS'"/>
-  <img ng-src="{{imageListModal[index].img640}}" class="fullscreen-image" ng-if="imageListModal[index].urlDownload == undefined && osPlatform != 'iOS'"/>
-
   <!-- ios-->
-  <img ng-src="{{imageListModal[index].img640}}" class="fullscreen-image" ng-if="osPlatform == 'iOS'"/>
+  <img ng-src="{{imageListModal[index].img640}}" class="fullscreen-image"/>
 
   <div class="bar bar-header bar-royal header-modal">
     <h1 class="title">{{imageListModal[index].name}}</h1>

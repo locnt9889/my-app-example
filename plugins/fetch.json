@@ -155,5 +155,14 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "cordova-plugin-winstore-jscompat": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/vjrantal/cordova-plugin-winstore-jscompat",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }

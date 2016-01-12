@@ -161,6 +161,9 @@
         },
         "org.apache.cordova.network-information": {
             "PACKAGE_NAME": "com.nevergone.imagegallery"
+        },
+        "cordova-plugin-winstore-jscompat": {
+            "PACKAGE_NAME": "com.nevergone.imagegallery"
         }
     },
     "dependent_plugins": {

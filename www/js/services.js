@@ -1,7 +1,6 @@
 angular.module('starter.services', [])
   .factory('ImageService', function($q, $http, $rootScope, $cordovaFileTransfer, $timeout, $cordovaToast) {
     var DOMAIN = "http://6recipes.com:5555";
-    var downloadStorage = new Lawnchair({ name : "DownloadStorage", adapter : "webkit-sqlite"}, function () {});
 
     return {
       getSearchImage: function(page, perPage, orderBy, orderType, categoryId, name) {
@@ -97,9 +96,6 @@ angular.module('starter.services', [])
 
           console.log("url download : " + result.nativeURL);
 
-          downloadStorage.remove(image.id.toString());
-          downloadStorage.save({key: image.id.toString(), image : image, img640 : image.urlDownload});
-
           $cordovaToast.showLongTop('Downloaded : ' + image.id);
 
           var url = DOMAIN + "/rest/image/execute?id=" + image.id + "&type=DOWNLOAD";
@@ -163,61 +159,8 @@ angular.module('starter.services', [])
         };
 
         return deferred.promise;
-      },
-      getDownloadList : function(url){
-        var deferred = $q.defer();
-
-        downloadStorage.all(function(result){
-          var resultConvert = [];
-          for(var i = 0; i < result.length; i ++){
-            resultConvert.push(result[i].image);
-          }
-          deferred.resolve(resultConvert);
-        });
-
-        return deferred.promise;
-      },
-      removeDownloadItem : function(id){
-        //var deferred = $q.defer();
-        //downloadStorage.remove(id.toString(), function(result){
-        //  deferred.resolve(result);
-        //});
-        //return deferred.promise;
-
-        downloadStorage.remove(id.toString());
-      },
-      checkMediaExists: function(id) {
-        var deferred = $q.defer();
-        downloadStorage.get(id.toString(), function(value){
-          var result = {exists: false, img640:"", image:{}};
-          if(value) {
-            result.exists = true;
-            result.img640 = value.img640;
-            result.image = value.media;
-          }
-          deferred.resolve(result);
-        });
-        return deferred.promise;
-      },
-      /**
-       * Update uuid of iOS app
-       * */
-      updateLastImagePathApp: function() {
-        var newPath = cordova.file.documentsDirectory + "ImageGalleryDownloads/";
-
-        console.log("new appDocumentsPath : " + newPath );
-
-        downloadStorage.all(function(result){
-          for(var i = 0; i < result.length; i++ ){
-            var urlDownload = result[i].img640;
-            var fileName = urlDownload.substring(urlDownload.lastIndexOf('/'));
-            result[i].img640 = newPath + fileName;
-            result[i].image.urlDownload = result[i].img640;
-            downloadStorage.remove(result[i].image.id.toString());
-            downloadStorage.save({key: result[i].image.id.toString(), image : result[i].image, img640 : result[i].img640});
-          }
-        });
       }
+
     };
   })
 .factory('CategoryService', function($q, $http) {
