@@ -23,6 +23,18 @@ angular.module('starter.services', [])
 
         return deferred.promise;
       },
+      getRandomImage: function(number) {
+        var deferred = $q.defer();
+
+        var url = DOMAIN + "/rest/image/find-random?number=" + number;
+        $http.get(url).then(function(res){
+          deferred.resolve(res.data);
+        }, function(err){
+          deferred.reject(err);
+        });
+
+        return deferred.promise;
+      },
       getByCategory: function(page, perPage, categoryId) {
         var deferred = $q.defer();
 

@@ -185,12 +185,11 @@ angular.module('starter.controllers', [])
     console.log("RecentCtrl");
     $scope.isRecentLoading = true;
     $scope.imageRecentList = [];
-    var page = 1;
-    var PER_PAGE = 20;
+    var NUMBER = 20;
     $scope.doRefreshRecent = function(){
-      ImageService.getSearchImage(page, PER_PAGE, "id", "DESC", 0, "").then(function (data) {
+      ImageService.getRandomImage(NUMBER).then(function (data) {
         console.log("data : " + JSON.stringify(data));
-        $scope.imageRecentList = data.results.items;
+        $scope.imageRecentList = data.results;
         $scope.isRecentLoading = false;
         $scope.$broadcast('scroll.refreshComplete');
       }, function (err) {
