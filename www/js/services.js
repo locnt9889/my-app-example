@@ -91,10 +91,10 @@ angular.module('starter.services', [])
         //var ext = this.getExtendedFileByUrl(url);
         var url = image.img640;
         var filename = url.split("/").pop();
-        var targetPath = cordova.file.externalRootDirectory + "Download/ImageGalleryDownloads/" + "Image_" + image.id + "_" +filename;
+        var targetPath = cordova.file.externalRootDirectory + "Download/WallpaperBackgroundDownloads/" + "Image_" + image.id + "_" +filename;
 
         if($rootScope.osPlatform == "iOS"){
-           targetPath = cordova.file.documentsDirectory + "ImageGalleryDownloads/" + "Image_" + image.id + "_" +filename;
+           targetPath = cordova.file.documentsDirectory + "WallpaperBackgroundDownloads/" + "Image_" + image.id + "_" +filename;
            console.log("targetPath : " + targetPath);
         }
         var trustHosts = true;
@@ -108,7 +108,7 @@ angular.module('starter.services', [])
 
           console.log("url download : " + result.nativeURL);
 
-          $cordovaToast.showLongTop('Downloaded : ' + image.id);
+          $cordovaToast.showLongTop('Downloaded to Downloads');
 
           var url = DOMAIN + "/rest/image/execute?id=" + image.id + "&type=DOWNLOAD";
           $http.get(url).then(function(res){
@@ -149,7 +149,7 @@ angular.module('starter.services', [])
             function(msg){
               console.log("saveImageDataToLibrary msg" + msg);
               image.urlDownload = url;
-              $cordovaToast.showLongTop('Downloaded : ' + image.id);
+              $cordovaToast.showLongTop('Downloaded to Gallery ');
 
               var url = DOMAIN + "/rest/image/execute?id=" + image.id + "&type=DOWNLOAD";
               $http.get(url).then(function(res){
